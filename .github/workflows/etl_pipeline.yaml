@@ -4,6 +4,7 @@ on:
   push:
     brances:
       - main
+  workflow_dispatch:
 
 jobs:
   etl_pipeline_job:
@@ -28,4 +29,4 @@ jobs:
         uses: mikeal/publish-to-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          branch_name: 'main'
+          BRANCH_NAME: 'main'
