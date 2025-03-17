@@ -1,0 +1,31 @@
+name: ETL Pipeline Automation
+
+on:
+  push:
+    brances:
+      - main
+
+jobs:
+  etl_pipeline_job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      
+      - name: Install Libraries or Dependencies
+        run: pip install streamlit pandas datetime
+      
+      - name: Run the python script
+        run: python app.py
+      
+      - name: Push back the changes to the files to the github repo
+        uses: mikeal/push-to-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          branch_name: 'main'
